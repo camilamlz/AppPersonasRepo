@@ -14,9 +14,9 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primarySwatch: Colors.blue,
-        scaffoldBackgroundColor: Color(0xFFEEEFF1)),
-      home: MyHomePage(title: 'Demo HomePage'),
+        primarySwatch: Colors.deepOrange,
+        scaffoldBackgroundColor: const Color(0xFFEEEFF1)),
+      home: MyHomePage(title: 'App Personas'),
     );
   }
 }
@@ -73,7 +73,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   boxShadow: [
                     BoxShadow(
                       color: Color.fromRGBO(0, 0, 0, 0.2),
-                      offset: Offset(6, 2),
+                      offset: Offset(2, 2),
                       blurRadius: 6.0,
                       spreadRadius: 3.0
                     ),
