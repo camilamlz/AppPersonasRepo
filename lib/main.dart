@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 void main() {
   runApp(const MyApp());
@@ -88,8 +89,40 @@ class _MyHomePageState extends State<MyHomePage> {
                     enabledBorder: OutlineInputBorder(
                       borderSide: BorderSide(color: Colors.white, width: 0.0),
                     ),
-                    hintText: "Ingresa tu nombre"
+                    hintText: "Ingresa tu nombre y apellido"
                   ),
+                ),
+              ),
+              SizedBox(height: 10.0,),
+              Text("Edad"),
+              SizedBox(height: 10.0,),
+              Container(
+                decoration: BoxDecoration(
+                    color: Color(0xFFFFFFFF),
+                    borderRadius: BorderRadius.circular(10.0),
+                    boxShadow: [
+                      BoxShadow(
+                          color: Color.fromRGBO(0, 0, 0, 0.2),
+                          offset: Offset(2, 2),
+                          blurRadius: 6.0,
+                          spreadRadius: 3.0
+                      ),
+                    ]
+                ),
+                child:  TextField(
+                  decoration: InputDecoration(
+/*                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.white, width: 0.0),
+                    ),*/
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.white, width: 0.0),
+                      ),
+                      hintText: "Ingresa tu edad"
+                  ),
+                  keyboardType: TextInputType.number,
+                  inputFormatters: [
+                    FilteringTextInputFormatter.allow(RegExp("^[0-9]"))//Solo admite números.
+                  ],
                 ),
               )
             ],
