@@ -24,7 +24,7 @@ class _MyHomePage extends State<MyHomePage> {
         title: Text(widget._title),
       ),
       body: ListView.builder(
-        itemCount: clients.length,
+        itemCount: clients.length, //contador de lista de clientes
         itemBuilder: (context, index) {
           return ListTile(
             onTap: () {
@@ -49,7 +49,7 @@ class _MyHomePage extends State<MyHomePage> {
               removeClient(context, clients[index]);
             },
             title: Text(clients[index].name + " " + clients[index].surname),
-            subtitle: Text(clients[index].name),
+            subtitle: Text(clients[index].phone),
             leading: CircleAvatar(
               child: Text(clients[index].name.substring(0, 1)),
             ),
@@ -60,6 +60,7 @@ class _MyHomePage extends State<MyHomePage> {
           );
         },
       ),
+
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Navigator.push(
@@ -76,7 +77,9 @@ class _MyHomePage extends State<MyHomePage> {
         },
         tooltip: "Agregar",
         child: Icon(Icons.add),
+
       ),
+
     );
   }
 
@@ -111,7 +114,8 @@ class _MyHomePage extends State<MyHomePage> {
           ],
         ));
   }
-}
+
+  }
 
 class Client {
   var name;

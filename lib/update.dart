@@ -30,7 +30,7 @@ class _ModifyContact extends State<ModifyContact> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Modificar Contacto"),
+        title: Text("Modificar Usuario"),
       ),
       body: ListView(
         children: [
