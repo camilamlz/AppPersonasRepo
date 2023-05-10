@@ -4,6 +4,7 @@ import 'package:app_personas/messages.dart';
 import 'package:app_personas/update.dart';
 import 'package:app_personas/create.dart';
 import 'package:flutter/material.dart';
+import 'package:collection/collection.dart';
 
 class MyHomePage extends StatefulWidget {
   final String _title;
@@ -16,9 +17,22 @@ class _MyHomePage extends State<MyHomePage> {
   List<Client> clients = [
     Client(name: 'John', surname: 'Doe', phone: '1 888 222 333 444', age: '18')
   ];
+/*
+  void main(){
+    List ratings = clients.map((e) => e.age!).toList();
+    List<int> intList = ratings.map((s) => int.parse(s)).toList();
+    double sum = ratings.fold(0, (p, c) => p + c);
+    if (sum > 0) {
+      double average = sum / ratings.length;
+      print(average);
+    }
+  }*/
 
   @override
   Widget build(BuildContext context) {
+    List ratings = clients.map((e) => e.age!).toList();
+    List<int> intList = ratings.map((s) => int.parse(s)).toList();
+    double average = intList.reduce((value, element) => value + element) / intList.length;
     return Scaffold(
       appBar: AppBar(
         title: Text(widget._title),
@@ -40,7 +54,7 @@ class _MyHomePage extends State<MyHomePage> {
                   padding: EdgeInsets.all(10.0),
                   width: 100.0,
                   child: Text(
-                    "Avg edad: ${clients.length}",
+                    "Avg edad: ${average}",
                     style: TextStyle(fontSize: 18),
                   )),
               ],
@@ -73,7 +87,7 @@ class _MyHomePage extends State<MyHomePage> {
                       removeClient(context, clients[index]);
                     },
                     title: Text(clients[index].name + " " + clients[index].surname),
-                    subtitle: Text(clients[index].phone),
+                    subtitle: Text(clients[index].age),
                     leading: CircleAvatar(
                       child: Text(clients[index].name.substring(0, 1)),
                     ),
