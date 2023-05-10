@@ -23,45 +23,72 @@ class _MyHomePage extends State<MyHomePage> {
       appBar: AppBar(
         title: Text(widget._title),
       ),
-      body: ListView.builder(
-        itemCount: clients.length, //contador de lista de clientes
-        itemBuilder: (context, index) {
-          return ListTile(
-            onTap: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (_) => ModifyContact(clients[index])))
-                  .then((newContact) {
-                if (newContact != null) {
-                  setState(() {
-                    clients.removeAt(index);
-
-                    clients.insert(index, newContact);
-
-                    messageResponse(
-                        context, newContact.name + " ha sido actualizado.");
-                  });
-                }
-              });
-            },
-            onLongPress: () {
-              removeClient(context, clients[index]);
-            },
-            title: Text(clients[index].name + " " + clients[index].surname),
-            subtitle: Text(clients[index].phone),
-            leading: CircleAvatar(
-              child: Text(clients[index].name.substring(0, 1)),
+      body: Column(
+        children: <Widget>[
+          Container(
+            height: 100.0,
+            child: Row(
+              children: <Widget>[
+                Container(
+                  padding: EdgeInsets.all(10.0),
+                  width: 100.0,
+                  child: Text(
+                      "Contador: ${clients.length}",
+                    style: TextStyle(fontSize: 18),
+                  )),
+                Container(
+                  padding: EdgeInsets.all(10.0),
+                  width: 100.0,
+                  child: Text(
+                    "Avg edad: ${clients.length}",
+                    style: TextStyle(fontSize: 18),
+                  )),
+              ],
             ),
-            trailing: Icon(
-              Icons.update,
-              color: Colors.red,
-            ),
-          );
-        },
+          ),
+          Expanded(
+              child:  ListView.builder(
+                itemCount: clients.length, //contador de lista de clientes
+                itemBuilder: (context, index) {
+                  return ListTile(
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (_) => ModifyContact(clients[index])))
+                          .then((newContact) {
+                        if (newContact != null) {
+                          setState(() {
+                            clients.removeAt(index);
+
+                            clients.insert(index, newContact);
+
+                            messageResponse(
+                                context, newContact.name + " ha sido actualizado ${clients.length}.");
+                          });
+                        }
+                      });
+                    },
+                    onLongPress: () {
+                      removeClient(context, clients[index]);
+                    },
+                    title: Text(clients[index].name + " " + clients[index].surname),
+                    subtitle: Text(clients[index].phone),
+                    leading: CircleAvatar(
+                      child: Text(clients[index].name.substring(0, 1)),
+                    ),
+                    trailing: Icon(
+                      Icons.update,
+                      color: Colors.red,
+                    ),
+                  );
+                },
+              ),
+          )
+        ],
       ),
 
-      floatingActionButton: FloatingActionButton(
+        floatingActionButton: FloatingActionButton(
         onPressed: () {
           Navigator.push(
               context, MaterialPageRoute(builder: (_) => RegisterContact()))
