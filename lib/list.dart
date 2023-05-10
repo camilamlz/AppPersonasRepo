@@ -30,9 +30,9 @@ class _MyHomePage extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    List ratings = clients.map((e) => e.age!).toList();
-    List<int> intList = ratings.map((s) => int.parse(s)).toList();
-    double average = intList.reduce((value, element) => value + element) / intList.length;
+    List ages = clients.map((e) => e.age!).toList();
+    List<int> intList = ages.map((s) => int.parse(s)).toList();
+    double average = intList.isEmpty ? 0.0 :intList.reduce((value, element) => value + element) / intList.length;
     return Scaffold(
       appBar: AppBar(
         title: Text(widget._title),
@@ -42,20 +42,29 @@ class _MyHomePage extends State<MyHomePage> {
           Container(
             height: 100.0,
             child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: <Widget>[
                 Container(
-                  padding: EdgeInsets.all(10.0),
-                  width: 100.0,
+                  padding: EdgeInsets.all(40),
+                  color: Colors.black,
                   child: Text(
-                      "Contador: ${clients.length}",
-                    style: TextStyle(fontSize: 18),
-                  )),
+                      "Usuarios: ${clients.length}",
+                    style: TextStyle(fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                      color: Colors.lightGreenAccent,
+                    ),
+                  )
+                ),
                 Container(
-                  padding: EdgeInsets.all(10.0),
-                  width: 100.0,
+                  padding: EdgeInsets.all(40),
+                  color: Colors.black,
                   child: Text(
                     "Avg edad: ${average}",
-                    style: TextStyle(fontSize: 18),
+                    style: TextStyle(fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.lightGreenAccent,
+                    ),
                   )),
               ],
             ),
