@@ -1,6 +1,7 @@
 import 'package:app_personas/list.dart';
 import 'package:flutter/material.dart';
 import 'package:app_personas/textbox.dart';
+import 'package:app_personas/hobbies_list.dart';
 
 class ModifyContact extends StatefulWidget {
   final Client _client;

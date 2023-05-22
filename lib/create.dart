@@ -1,8 +1,8 @@
-import 'dart:ffi';
-
 import 'package:app_personas/list.dart';
 import 'package:app_personas/textbox.dart';
+import 'package:app_personas/hobbies_list.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 
 class RegisterContact extends StatefulWidget {
@@ -26,6 +26,11 @@ class _RegisterContact extends State<RegisterContact> {
     controllerAge = new TextEditingController();
     super.initState();
   }
+  
+  void _handleSaveSelectedOptions(List<String> selectedOptions) {
+    // Handle the selected options here, such as saving them to a database or performing an action
+    print('Selected options: $selectedOptions');
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +38,10 @@ class _RegisterContact extends State<RegisterContact> {
         appBar: AppBar(
           title: const Text("Ingresa tus datos "),
         ),
-        body: ListView(
+        body: Column(
+            children: <Widget>[
+        Expanded(
+        child: ListView(
           padding: const EdgeInsets.all(18.0),
           children: [
             TextField(controller: controllerName,
@@ -66,7 +74,30 @@ class _RegisterContact extends State<RegisterContact> {
             ),
             keyboardType: TextInputType.number,
             ),
+        ]
+    )
+    ),
+    Expanded(
+      child: Container(
+    width: 200.0, // Set the width
+    height: 200.0, // Set the height
+        child: FittedBox(
+    child: FloatingActionButton.extended(
+    onPressed: () {
+      Navigator.push(context,
+      MaterialPageRoute(builder: (context) => HobbiesCheckboxList(onSaveSelectedOptions: _handleSaveSelectedOptions,)
+      )
+      );
+    },
+      backgroundColor: Colors.pink,
+      label: Text("Hobbies"),
+      icon: const Icon(Icons.sunny),
 
+
+      ),
+        )
+      )
+    ),
             ElevatedButton(
                 onPressed: () {
 
@@ -87,7 +118,10 @@ class _RegisterContact extends State<RegisterContact> {
 
                 child: const Text("Guardar")),
 
-      ]
-        ));
+
+
+  ]));
   }
 }
+
+
