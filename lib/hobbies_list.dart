@@ -11,11 +11,11 @@ class HobbiesCheckboxList extends StatefulWidget {
 
 class _HobbiesCheckboxListState extends State<HobbiesCheckboxList> {
   List<String> hobbies = [
-    'Reading',
-    'Writing',
-    'Drawing',
-    'Playing Music',
-    'Cooking',
+    'Leer',
+    'Escribir',
+    'Pintar',
+    'Tocar música',
+    'Cocinar',
   ];
   List<bool> _checked = [false, false, false, false, false];
 

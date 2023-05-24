@@ -5,6 +5,7 @@ import 'package:app_personas/update.dart';
 import 'package:app_personas/create.dart';
 import 'package:flutter/material.dart';
 import 'package:collection/collection.dart';
+import 'dart:convert';
 
 class MyHomePage extends StatefulWidget {
   final String _title;
@@ -15,24 +16,20 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePage extends State<MyHomePage> {
   List<Client> clients = [
-    Client(name: 'John', surname: 'Doe', phone: '1 888 222 333 444', age: '18')
+    Client(name: 'John', surname: 'Doe', phone: '1 888 222 333 444', age: '18', hobbies: 'Saltar')
   ];
-/*
-  void main(){
-    List ratings = clients.map((e) => e.age!).toList();
-    List<int> intList = ratings.map((s) => int.parse(s)).toList();
-    double sum = ratings.fold(0, (p, c) => p + c);
-    if (sum > 0) {
-      double average = sum / ratings.length;
-      print(average);
-    }
-  }*/
 
   @override
   Widget build(BuildContext context) {
     List ages = clients.map((e) => e.age!).toList();
     List<int> intList = ages.map((s) => int.parse(s)).toList();
     double average = intList.isEmpty ? 0.0 :intList.reduce((value, element) => value + element) / intList.length;
+    List hobbies = clients.map((e) => e.hobbies!).toList();
+    int startIndex = 0;
+    //String sublistHobbies = <String>.from(hobbies.sublist(startIndex));
+    print(hobbies);
+    //print(sublistHobbies);
+    //List<String> hobbiesList = sublistHobbies.split(',').map((value) => value.trim()).toList();
     return Scaffold(
       appBar: AppBar(
         title: Text(widget._title),
@@ -61,7 +58,7 @@ class _MyHomePage extends State<MyHomePage> {
                   color: Colors.black,
                   child: Text(
                     "Avg edad: ${average}",
-                    style: TextStyle(fontSize: 18,
+                    style: const TextStyle(fontSize: 18,
                       fontWeight: FontWeight.bold,
                       color: Colors.lightGreenAccent,
                     ),
@@ -96,11 +93,11 @@ class _MyHomePage extends State<MyHomePage> {
                       removeClient(context, clients[index]);
                     },
                     title: Text(clients[index].name + " " + clients[index].surname),
-                    subtitle: Text(clients[index].age),
+                    subtitle: Text(clients[index].hobbies),
                     leading: CircleAvatar(
                       child: Text(clients[index].name.substring(0, 1)),
                     ),
-                    trailing: Icon(
+                    trailing: const Icon(
                       Icons.update,
                       color: Colors.red,
                     ),
@@ -120,13 +117,13 @@ class _MyHomePage extends State<MyHomePage> {
               setState(() {
                 clients.add(newContact);
                 messageResponse(
-                    context, newContact.name + " ha sido guardado.");
+                    context, newContact.name + " ha sido guardado." + " con sus hobbies " + newContact.hobbies);
               });
             }
           });
         },
         tooltip: "Agregar",
-        child: Icon(Icons.add),
+        child: const Icon(Icons.add),
 
       ),
 
@@ -172,6 +169,7 @@ class Client {
   var surname;
   var phone;
   var age;
+  var hobbies;
 
-  Client({this.name, this.surname, this.phone, this.age});
+  Client({this.name, this.surname, this.phone, this.age, this.hobbies});
 }

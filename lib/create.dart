@@ -4,6 +4,7 @@ import 'package:app_personas/hobbies_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
+import 'dart:convert';
 
 class RegisterContact extends StatefulWidget {
 
@@ -17,6 +18,8 @@ class _RegisterContact extends State<RegisterContact> {
   late TextEditingController controllerSurname;
   late TextEditingController controllerPhone;
   late TextEditingController controllerAge;
+  late TextEditingController controllerHobbies;
+
 
   @override
   void initState() {
@@ -26,14 +29,21 @@ class _RegisterContact extends State<RegisterContact> {
     controllerAge = new TextEditingController();
     super.initState();
   }
-  
+
+
   void _handleSaveSelectedOptions(List<String> selectedOptions) {
     // Handle the selected options here, such as saving them to a database or performing an action
-    print('Selected options: $selectedOptions');
+    //print('Selected options: $selectedOptions');
+    controllerHobbies = new TextEditingController();
+    controllerHobbies.text = selectedOptions.join(',');
+    print(controllerHobbies);
   }
+
+
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
         appBar: AppBar(
           title: const Text("Ingresa tus datos "),
@@ -73,38 +83,39 @@ class _RegisterContact extends State<RegisterContact> {
               icon: Icon(Icons.cake)
             ),
             keyboardType: TextInputType.number,
-            ),
-        ]
-    )
-    ),
-    Expanded(
-      child: Container(
-    width: 200.0, // Set the width
-    height: 200.0, // Set the height
-        child: FittedBox(
-    child: FloatingActionButton.extended(
-    onPressed: () {
-      Navigator.push(context,
-      MaterialPageRoute(builder: (context) => HobbiesCheckboxList(onSaveSelectedOptions: _handleSaveSelectedOptions,)
-      )
-      );
-    },
-      backgroundColor: Colors.pink,
-      label: Text("Hobbies"),
-      icon: const Icon(Icons.sunny),
+             ),
+            ]
+          )
+        ),
+        Expanded(
+          child: Container(
+            width: 200.0, // Set the width
+            height: 200.0, // Set the height
+            child: FittedBox(
+            child: FloatingActionButton.extended(
+              onPressed: () {
+                Navigator.push(context,
+                MaterialPageRoute(builder: (context) => HobbiesCheckboxList(onSaveSelectedOptions: _handleSaveSelectedOptions,)
+                )
+                );
+              },
+                backgroundColor: Colors.pink,
+                label: const Text("Hobbies"),
+                icon: const Icon(Icons.sunny),
 
 
-      ),
-        )
-      )
-    ),
+              ),
+            )
+          )
+        ),
+
             ElevatedButton(
                 onPressed: () {
-
                   String name = controllerName.text;
                   String surname = controllerSurname.text;
                   String phone = controllerPhone.text;
                   String age = controllerAge.text;
+                  String hobbies = controllerHobbies.text;
 
 
                   if (name.isNotEmpty &&
@@ -112,11 +123,12 @@ class _RegisterContact extends State<RegisterContact> {
                       phone.isNotEmpty &&
                       age.isNotEmpty) {
                     Navigator.pop(context,
-                        Client(name: name, surname: surname, phone: phone, age: age));
+                        Client(name: name, surname: surname, phone: phone, age: age, hobbies: hobbies));
                   }
                 },
 
                 child: const Text("Guardar")),
+
 
 
 
