@@ -53,13 +53,13 @@ class _MyHomePage extends State<MyHomePage> {
     String result = ''; //String para guardar todos los valores después del split
     for (String hobbies in frequencyMap.keys) {
       int count = frequencyMap[hobbies]!;
-      String wordCountText = "El hobbie '$hobbies' le gusta a  $count persona(s)\n";
+      String wordCountText = "El hobbie $hobbies le gusta a $count persona(s)\n";
       result += wordCountText;
     }
 
     const double size01 = 20.0;
     const double size02 = 25.0;
-    const double size03 = 15.0;
+    const double size03 = 20.0;
 
     return Scaffold(
       appBar: AppBar(
@@ -120,7 +120,7 @@ class _MyHomePage extends State<MyHomePage> {
                       removeClient(context, clients[index]);
                     },
                     title: Text(clients[index].name + " " + clients[index].surname),
-                    subtitle: Text(clients[index].hobbies),
+                    subtitle: Text(clients[index].age + " años"),
                     leading: CircleAvatar(
                       child: Text(clients[index].name.substring(0, 1)),
                     ),
