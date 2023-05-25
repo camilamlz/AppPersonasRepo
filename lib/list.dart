@@ -16,56 +16,83 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePage extends State<MyHomePage> {
   List<Client> clients = [
-    Client(name: 'John', surname: 'Doe', phone: '1 888 222 333 444', age: '18', hobbies: 'Saltar')
+    //Client(name: 'John', surname: 'Doe', phone: '1 888 222 333 444', age: '18', hobbies: 'Saltar')
   ];
 
   @override
   Widget build(BuildContext context) {
-    List ages = clients.map((e) => e.age!).toList();
-    List<int> intList = ages.map((s) => int.parse(s)).toList();
-    double average = intList.isEmpty ? 0.0 :intList.reduce((value, element) => value + element) / intList.length;
-    List hobbies = clients.map((e) => e.hobbies!).toList();
-    int startIndex = 0;
-    //String sublistHobbies = <String>.from(hobbies.sublist(startIndex));
-    print(hobbies);
-    //print(sublistHobbies);
-    //List<String> hobbiesList = sublistHobbies.split(',').map((value) => value.trim()).toList();
+    List ages = clients.map((e) => e.age!).toList(); //Enviar todas las edades a una lista
+    List<int> intList = ages.map((s) => int.parse(s)).toList(); //Enviar todas las edades a una lista de enteros
+    double average = intList.isEmpty ? 0.0 :intList.reduce((value, element) => value + element) / intList.length; //Calcular promedio edad
+    final List hobbiesList = clients.map((e) => e.hobbies!).toList(); //Tomar hobbies de lista clientes y enviarlos a una lista única.
+    print(hobbiesList);
+    print(intList);
+
+    //Split de lista de hobbies en items en específico separados por ,
+    List<String> words = [];
+    for (dynamic sentence in hobbiesList) {
+      if (sentence is String) {
+        List<String> splitWords = sentence.split(',');
+        words.addAll(splitWords);
+      }
+    }
+    print("Palabras '$words'");
+
+    //Contar cuántas veces se repite cada hobbie
+    Map<String, int> frequencyMap = {};
+
+    for (String hobbies in words) {
+      if (frequencyMap.containsKey(hobbies)) {
+        frequencyMap[hobbies] = frequencyMap[hobbies]! + 1;
+      } else {
+        frequencyMap[hobbies] = 1;
+      }
+    }
+
+
+    String result = ''; //String para guardar todos los valores después del split
+    for (String hobbies in frequencyMap.keys) {
+      int count = frequencyMap[hobbies]!;
+      String wordCountText = "El hobbie '$hobbies' le gusta a  $count persona(s)\n";
+      result += wordCountText;
+    }
+
+    const double size01 = 20.0;
+    const double size02 = 25.0;
+    const double size03 = 15.0;
+
     return Scaffold(
       appBar: AppBar(
         title: Text(widget._title),
       ),
-      body: Column(
-        children: <Widget>[
-          Container(
-            height: 100.0,
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: <Widget>[
-                Container(
-                  padding: EdgeInsets.all(40),
-                  color: Colors.black,
-                  child: Text(
-                      "Usuarios: ${clients.length}",
-                    style: TextStyle(fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                      color: Colors.lightGreenAccent,
-                    ),
-                  )
-                ),
-                Container(
-                  padding: EdgeInsets.all(40),
-                  color: Colors.black,
-                  child: Text(
-                    "Avg edad: ${average}",
-                    style: const TextStyle(fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.lightGreenAccent,
-                    ),
-                  )),
-              ],
-            ),
-          ),
+        body: Column(
+            children: <Widget>[
+      Expanded(
+          child: Row(children: <Widget>[
+            Expanded(
+                child: Container(
+                    color: Colors.red,
+                    child:  Center(
+                        child: Text("Usuarios: ${clients.length}",
+                            style: TextStyle(fontSize: size02))))),
+            Expanded(
+                child: Container(
+                    color: Colors.yellow,
+                    child:  Center(
+                        child: Text("Avg edad: ${average}",
+                            style: TextStyle(fontSize: size02))))),
+          ])), //Row 1/2
+
+      Expanded(
+          child: Row(children: <Widget>[
+          Expanded(
+          child: Container(
+              color: Colors.green,
+              child:  Center(
+                  child: Text(result,
+                      style: TextStyle(fontSize: size03))))),
+            ])),
+
           Expanded(
               child:  ListView.builder(
                 itemCount: clients.length, //contador de lista de clientes
@@ -117,7 +144,7 @@ class _MyHomePage extends State<MyHomePage> {
               setState(() {
                 clients.add(newContact);
                 messageResponse(
-                    context, newContact.name + " ha sido guardado." + " con sus hobbies " + newContact.hobbies);
+                    context, newContact.name + " ha sido guardado.");
               });
             }
           });
@@ -160,8 +187,7 @@ class _MyHomePage extends State<MyHomePage> {
             )
           ],
         ));
-  }
-
+    }
   }
 
 class Client {
@@ -171,5 +197,5 @@ class Client {
   var age;
   var hobbies;
 
-  Client({this.name, this.surname, this.phone, this.age, this.hobbies});
+  Client({this.name, this.surname, this.phone, this.age, this.hobbies}); //Todos los campos del cliente
 }

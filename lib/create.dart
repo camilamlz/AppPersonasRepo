@@ -2,7 +2,7 @@ import 'package:app_personas/list.dart';
 import 'package:app_personas/textbox.dart';
 import 'package:app_personas/hobbies_list.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
+
 import 'package:flutter/services.dart';
 import 'dart:convert';
 
@@ -32,10 +32,9 @@ class _RegisterContact extends State<RegisterContact> {
 
 
   void _handleSaveSelectedOptions(List<String> selectedOptions) {
-    // Handle the selected options here, such as saving them to a database or performing an action
-    //print('Selected options: $selectedOptions');
+    // Gestionar las opciones seleccionadas aquí, como guardarlas
     controllerHobbies = new TextEditingController();
-    controllerHobbies.text = selectedOptions.join(',');
+    controllerHobbies.text = selectedOptions.join('|');
     print(controllerHobbies);
   }
 
@@ -87,7 +86,7 @@ class _RegisterContact extends State<RegisterContact> {
             ]
           )
         ),
-        Expanded(
+        Expanded( //Creación de botón de hobbies
           child: Container(
             width: 200.0, // Set the width
             height: 200.0, // Set the height
@@ -95,7 +94,7 @@ class _RegisterContact extends State<RegisterContact> {
             child: FloatingActionButton.extended(
               onPressed: () {
                 Navigator.push(context,
-                MaterialPageRoute(builder: (context) => HobbiesCheckboxList(onSaveSelectedOptions: _handleSaveSelectedOptions,)
+                MaterialPageRoute(builder: (context) => HobbiesCheckboxList(onSaveSelectedOptions: _handleSaveSelectedOptions,) //Llamar a la clase HobbiesCheckboxList
                 )
                 );
               },
@@ -115,7 +114,7 @@ class _RegisterContact extends State<RegisterContact> {
                   String surname = controllerSurname.text;
                   String phone = controllerPhone.text;
                   String age = controllerAge.text;
-                  String hobbies = controllerHobbies.text;
+                  String hobbies = controllerHobbies.text; //Mandar valores de hobbies a controlador en un texto entero.
 
 
                   if (name.isNotEmpty &&
@@ -123,7 +122,7 @@ class _RegisterContact extends State<RegisterContact> {
                       phone.isNotEmpty &&
                       age.isNotEmpty) {
                     Navigator.pop(context,
-                        Client(name: name, surname: surname, phone: phone, age: age, hobbies: hobbies));
+                        Client(name: name, surname: surname, phone: phone, age: age, hobbies: hobbies)); //Enviando todos los parámetros del cliente
                   }
                 },
 
