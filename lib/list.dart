@@ -24,6 +24,7 @@ class _MyHomePage extends State<MyHomePage> {
     List ages = clients.map((e) => e.age!).toList(); //Enviar todas las edades a una lista
     List<int> intList = ages.map((s) => int.parse(s)).toList(); //Enviar todas las edades a una lista de enteros
     double average = intList.isEmpty ? 0.0 :intList.reduce((value, element) => value + element) / intList.length; //Calcular promedio edad
+    var averageRounded = num.parse(average.toStringAsFixed(2));
     final List hobbiesList = clients.map((e) => e.hobbies!).toList(); //Tomar hobbies de lista clientes y enviarlos a una lista única.
     print(hobbiesList);
     print(intList);
@@ -79,7 +80,7 @@ class _MyHomePage extends State<MyHomePage> {
                 child: Container(
                     color: Colors.yellow,
                     child:  Center(
-                        child: Text("Avg edad: ${average}",
+                        child: Text("Avg edad: ${averageRounded}",
                             style: TextStyle(fontSize: size02))))),
           ])), //Row 1/2
 
