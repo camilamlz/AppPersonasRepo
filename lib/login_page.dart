@@ -10,9 +10,6 @@ class _LoginPageState extends State<LoginPage> {
   TextEditingController usernameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
 
-  // String usu = '';
-  // String pass = '';
-
   @override
   Widget build(BuildContext context) {
     return Container(
