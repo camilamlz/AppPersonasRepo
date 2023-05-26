@@ -34,7 +34,7 @@ class _RegisterContact extends State<RegisterContact> {
   void _handleSaveSelectedOptions(List<String> selectedOptions) {
     // Gestionar las opciones seleccionadas aquí, como guardarlas
     controllerHobbies = new TextEditingController();
-    controllerHobbies.text = selectedOptions.join('|');
+    controllerHobbies.text = selectedOptions.join(',');
     print(controllerHobbies);
   }
 
