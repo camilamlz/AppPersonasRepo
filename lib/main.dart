@@ -1,3 +1,4 @@
+import 'package:app_personas/login_page.dart';
 import 'package:flutter/material.dart';
 
 import 'list.dart';
@@ -15,7 +16,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
           primarySwatch: Colors.pink,
           scaffoldBackgroundColor: const Color(0xFFEEEFF1)),
-      home: MyHomePage("App Personas"),
+      home: LoginPage(),
     );
   }
 }
