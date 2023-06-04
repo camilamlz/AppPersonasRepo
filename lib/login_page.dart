@@ -11,24 +11,23 @@ class _LoginPageState extends State<LoginPage> {
   TextEditingController usernameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
 
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      decoration: const BoxDecoration(
-          gradient: LinearGradient(
-        begin: Alignment.topRight,
-        end: Alignment.bottomLeft,
-        colors: [
-          Colors.blue,
-          Colors.red,
-        ],
-      )),
-      child: Scaffold(
-        backgroundColor: Colors.transparent,
-        body: SingleChildScrollView(child: _page()),
-      ),
-    );
-  }
+  // 
+       @override
+   Widget build(BuildContext context) {
+     return Container(
+       decoration: const BoxDecoration(
+           image: DecorationImage(
+            image: AssetImage('assets/logo3.jpg'),
+            // repeat: ImageRepeat.repeat,
+            fit: BoxFit.fill
+           ),
+           ),
+       child: Scaffold(
+         backgroundColor: Colors.transparent,
+         body: SingleChildScrollView(child: _page()),
+       ),
+     );
+   }
 
   Widget _page() {
     return Padding(
